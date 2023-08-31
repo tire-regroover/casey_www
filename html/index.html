@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Casey</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!--<link rel="stylesheet" href="https://unpkg.com/7.css">-->
+
+<style>
+body {
+  font-family: system-ui,-apple-system,system-ui,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
+  background-color: #fff;
+  color: #888;
+}
+a {
+  font-size: 3vw;
+  font-weight: 800;
+  background-color: #fff;
+  color: #154c79;
+  line-height: 1;
+}
+.menu {
+  width: 98%;
+  font-size: 5vw;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.5em;
+}
+.menu td {
+  padding: .6em;
+  vertical-align: middle;
+  line-height: 0;
+}
+.menu td.col1 {
+  width: 20%;
+  text-align: center;
+}
+.menu td * {
+}
+button {
+  font-size: 3vw;
+  font-weight: 600;
+  padding: 0.7em;
+  width: 5em;
+  background-color: #154c79;
+  color: #fff;
+  outline: 0;
+  border: 0;
+  border-radius: 1.5em;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
+}
+button:before {
+  background-color: initial;
+  background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 100%);
+  opacity: .5;
+  border-radius: 3.6em;
+  height: 50%;
+  left: 4%;
+  position: absolute;
+  top: 0;
+  width: 92%;
+  content: "";
+}
+button:hover {
+  transform: scale(1.05);
+}
+output {
+  font-size: 3vw;
+  font-weight: 600;
+  font-family: monospace;
+}
+
+</style>
+
+<script>
+
+var handler = "handler.php?action=";
+
+function get(url, callback, fail) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4) {
+      if (this.status == 200) {
+        callback(this);
+      }
+      else {
+        fail(this);
+      }
+    }
+  };
+  xhttp.open("GET", url, true);
+  xhttp.send();
+}
+
+function go(thing) {
+  res = document.getElementById("res_".concat(thing));
+  get(handler.concat(thing),
+    function(xhtml) {
+      res.innerText = (new Date).toLocaleString().concat(": ", xhtml.responseText);
+    },
+    function(xhtml) {
+      res.innerText = (new Date).toLocaleString().concat(": ", xhtml.responseText);
+    }
+  );
+}
+
+</script>
+</head>
+
+<body>
+
+<div>
+  <table class="menu">
+    <tr><td class="col1"><a href="http://192.168.0.18:8081/" target="_blank">Casey</a></td><td></td></tr>
+    <tr><td class="col1"><button onclick="go('motion_start')">Start</button></td><td><output id="res_motion_start"></output></td></tr>
+    <tr><td class="col1"><button onclick="go('motion_stop')">Stop</button></td><td><output id="res_motion_stop"></output></td></tr>
+  </table>
+</div>
+
+</body>
+</html>
+
