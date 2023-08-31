@@ -36,8 +36,6 @@ a {
   width: 20%;
   text-align: center;
 }
-.menu td * {
-}
 button {
   font-size: 3vw;
   font-weight: 600;
@@ -73,6 +71,9 @@ output {
   font-weight: 600;
   font-family: monospace;
 }
+img.vidya {
+  width: 450px;
+}
 
 </style>
 
@@ -80,14 +81,22 @@ output {
 
 var handler = "handler.php?action=";
 
+var v = 0;
+var vidya_url = "http://192.168.0.18:8081/";
+
+function vidyaUpdate() {
+  document.getElementById("vidya_image").src = vidya_url + "&" + (v++);
+}
+
 function get(url, callback, fail) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4) {
       if (this.status == 200) {
         callback(this);
-        i = 0;
-        setTimeout(jsUpdate, 3000);
+
+v = 0;
+        setTimeout(vidyaUpdate, 3000);
       }
       else {
         fail(this);
@@ -110,24 +119,28 @@ function go(thing) {
   );
 }
 
-var i = 0;
-var url = "http://192.168.0.18:8081/";
-function jsUpdate() {document.vidya_image.src=url+"&"+(i++);}
-
 </script>
 </head>
 
-<body onLoad="jsUpdate()">
+<body onLoad="vidyaUpdate()">
 
 <div>
   <table class="menu">
 <!--    <tr><td class="col1"><a href="http://192.168.0.18:8081/" target="_blank">Casey</a></td><td></td></tr>-->
-    <tr><td class="col1"><button onclick="go('motion_start')">Start</button></td><td><output id="res_motion_start"></output></td></tr>
-    <tr><td class="col1"><button onclick="go('motion_stop')">Stop</button></td><td><output id="res_motion_stop"></output></td></tr>
-    <tr><td class="col1"><img name="vidya_image" onLoad="jsUpdate()" width="320" height="240" /></td></td></tr>
+    <tr>
+      <td class="col1"><button onclick="go('motion_start')">Start</button></td>
+      <td><output id="res_motion_start"></output></td>
+    </tr>
+    <tr>
+      <td class="col1"><button onclick="go('motion_stop')">Stop</button></td>
+      <td><output id="res_motion_stop"></output></td>
+    </tr>
   </table>
 </div>
 
+<div>
+  <img id="vidya_image" class="vidya" onLoad="vidyaUpdate()" />
+</div>
 
 </body>
 </html>
