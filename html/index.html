@@ -51,6 +51,12 @@ button:hover {
   font-weight: 600;
   font-family: monospace;
 }
+.ok {
+  color: #39d82b;
+}
+.fail {
+  color: #d83d10;
+}
 div.viddiv {
   padding-top: 56.25%;
   width: 100%;
@@ -69,8 +75,6 @@ div.left {
 div.right {
   width: 72%;
   float: left;
-}
-div.left div {
 }
 </style>
 
@@ -106,10 +110,11 @@ function go(thing) {
   res = document.getElementById("res_".concat(thing));
   get(handler.concat(thing),
     function(xhtml) {
-      res.innerText = (new Date).toLocaleString().concat(": ", xhtml.responseText);
+      res.innerHTML = (new Date).toLocaleString().concat(": <span class='ok'>", xhtml.responseText, "</span>");
     },
     function(xhtml) {
-      res.innerText = (new Date).toLocaleString().concat(": ", xhtml.responseText);
+      res.innerHTML = (new Date).toLocaleString().concat(": <span class='fail'>", xhtml.responseText, "</span>");
+      //res.innerHTML = (new Date).toLocaleString().concat(": ", xhtml.responseText);
     }
   );
 }
