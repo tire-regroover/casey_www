@@ -6,9 +6,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!--<link rel="stylesheet" href="https://unpkg.com/7.css">-->
-
 <style>
+
 body {
   font-family: system-ui,-apple-system,system-ui,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
   background-color: #fff;
@@ -22,14 +21,14 @@ a {
   line-height: 1;
 }
 .menu {
-  width: 98%;
+  width: 99%;
   font-size: 5vw;
   margin-left: auto;
   margin-right: auto;
-  padding: 0.5em;
+  padding: .2em;
 }
 .menu td {
-  padding: .6em;
+  padding: .2em;
   vertical-align: middle;
   line-height: 0;
 }
@@ -42,7 +41,7 @@ a {
 button {
   font-size: 3vw;
   font-weight: 600;
-  padding: 0.7em;
+  padding: 0.3em;
   width: 5em;
   background-color: #154c79;
   color: #fff;
@@ -87,6 +86,8 @@ function get(url, callback, fail) {
     if (this.readyState == 4) {
       if (this.status == 200) {
         callback(this);
+        i = 0;
+        setTimeout(jsUpdate, 3000);
       }
       else {
         fail(this);
@@ -109,18 +110,24 @@ function go(thing) {
   );
 }
 
+var i = 0;
+var url = "http://192.168.0.18:8081/";
+function jsUpdate() {document.vidya_image.src=url+"&"+(i++);}
+
 </script>
 </head>
 
-<body>
+<body onLoad="jsUpdate()">
 
 <div>
   <table class="menu">
-    <tr><td class="col1"><a href="http://192.168.0.18:8081/" target="_blank">Casey</a></td><td></td></tr>
+<!--    <tr><td class="col1"><a href="http://192.168.0.18:8081/" target="_blank">Casey</a></td><td></td></tr>-->
     <tr><td class="col1"><button onclick="go('motion_start')">Start</button></td><td><output id="res_motion_start"></output></td></tr>
     <tr><td class="col1"><button onclick="go('motion_stop')">Stop</button></td><td><output id="res_motion_stop"></output></td></tr>
+    <tr><td class="col1"><img name="vidya_image" onLoad="jsUpdate()" width="320" height="240" /></td></td></tr>
   </table>
 </div>
+
 
 </body>
 </html>
