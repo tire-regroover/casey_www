@@ -107,14 +107,13 @@ function get(url, callback, fail) {
 }
 
 function go(thing) {
-  res = document.getElementById("res_".concat(thing));
+  var res = document.getElementById("res_".concat(thing));
   get(handler.concat(thing),
     function(xhtml) {
       res.innerHTML = (new Date).toLocaleString().concat(": <span class='ok'>", xhtml.responseText, "</span>");
     },
     function(xhtml) {
       res.innerHTML = (new Date).toLocaleString().concat(": <span class='fail'>", xhtml.responseText, "</span>");
-      //res.innerHTML = (new Date).toLocaleString().concat(": ", xhtml.responseText);
     }
   );
 }
