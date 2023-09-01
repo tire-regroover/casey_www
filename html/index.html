@@ -113,7 +113,7 @@ function go(thing) {
       res.innerHTML = (new Date).toLocaleString().concat(": <span class='ok'>", xhtml.responseText, "</span>");
     },
     function(xhtml) {
-      res.innerHTML = (new Date).toLocaleString().concat(": <span class='fail'>", xhtml.responseText, "</span>");
+      res.innerHTML = ("<span class='fail'>").concat(new Date).toLocaleString(), ": ", xhtml.responseText, "</span>");
     }
   );
 }
