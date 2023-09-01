@@ -12,8 +12,8 @@
 }
 body {
   font-family: system-ui,-apple-system,system-ui,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
-  background-color: #fff;
-  color: #888;
+  background-color: #8aa6bc;
+  color: #555;
 }
 button {
   margin: 5px 0;
@@ -124,10 +124,10 @@ function go(thing) {
 <body onLoad="vidyaUpdate()">
 
 <div class="left">
-  <div><button class="reload" onclick="vidyaUpdate()">&#x21bb;</button></div>
-  <div><button onclick="go('motion_start')">Start</button></div>
+  <div><button class="reload" onclick="vidyaUpdate()" title="Reload">&#x21BB;</button></div>
+  <div><button onclick="go('motion_start')" title="Start">&#9655;<!--&#x1F7E2;--></button></div>
   <div class="out"><div class="output" id="res_motion_start">&nbsp;</div></div>
-  <div><button onclick="go('motion_stop')">Stop</button></div>
+  <div><button onclick="go('motion_stop')" title="Stop">&#9634;<!--&#x1F6D1;--></button></div>
   <div class="out"><div class="output" id="res_motion_stop">&nbsp;</div></div>
 </div>
 

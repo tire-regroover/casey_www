@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-sudo -S systemctl start motion.service
+sudo systemctl start motion.service
