@@ -21,7 +21,6 @@ body {
   color: #ccc;
   background: linear-gradient(-45deg, #ffffff, #154279);
   background-size: 200% 200%;
-  height: 100vh;
 }
 button {
   margin: 5px 0;
@@ -61,6 +60,10 @@ div.viddiv {
   padding-top: 56.25%;
   width: 100%;
   position: relative;
+  /*background-color: #282a2d;*/
+  background: linear-gradient(45deg, #282a2d, #154279);
+  background-size: 300% 300%;
+  border-radius: 4px;
 }
 img.vidya {
   width: 100%;
@@ -85,7 +88,12 @@ var v = 0;
 var vidya_url = "http://192.168.0.18:8081/";
 
 function vidyaUpdate() {
+  document.getElementById("vidya_image").style.visibility = "visible";
   document.getElementById("vidya_image").src = vidya_url + "?" + (v++);
+}
+
+function vidyaStopped() {
+  document.getElementById("vidya_image").style.visibility = "hidden";
 }
 
 function get(url, callback, fail) {
@@ -131,7 +139,7 @@ function go(thing) {
 </div>
 
 <div class="right">
-  <div class="viddiv"><img id="vidya_image" class="vidya" onLoad="vidyaUpdate()" /></div>
+  <div class="viddiv"><img id="vidya_image" class="vidya" onLoad="vidyaUpdate()" onerror="vidyaStopped()" /></div>
 </div>
 
 </body>
