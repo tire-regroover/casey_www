@@ -89,15 +89,17 @@ const retry_ms = 30000;
 var repeater;
 var v = 0;
 
+repeater = setInterval(vidyaUpdate, retry_ms);
+
 function vidyaUpdate() {
   document.getElementById("vidya_image").style.visibility = "visible";
   document.getElementById("vidya_image").src = vidya_url + "?" + (v++);
-  clearInterval(repeater);
+//  clearInterval(repeater);
 }
 
 function vidyaStopped() {
   document.getElementById("vidya_image").style.visibility = "hidden";
-  repeater = setInterval(vidyaUpdate, retry_ms);
+//  repeater = setInterval(vidyaUpdate, retry_ms);
 }
 
 function get(url, callback, fail) {
