@@ -82,18 +82,22 @@ div.right {
 </style>
 
 <script>
-var handler = "handler.php?action=";
+const handler = "handler.php?action=";
+const vidya_url = "http://192.168.0.18:8081/";
+const retry_ms = 30000;
 
+var repeater;
 var v = 0;
-var vidya_url = "http://192.168.0.18:8081/";
 
 function vidyaUpdate() {
   document.getElementById("vidya_image").style.visibility = "visible";
   document.getElementById("vidya_image").src = vidya_url + "?" + (v++);
+  clearInterval(repeater);
 }
 
 function vidyaStopped() {
   document.getElementById("vidya_image").style.visibility = "hidden";
+  repeater = setInterval(vidyaUpdate, retry_ms);
 }
 
 function get(url, callback, fail) {
@@ -131,10 +135,10 @@ function go(thing) {
 <body onLoad="vidyaUpdate()">
 
 <div class="left">
-  <div><button class="reload" onclick="vidyaUpdate()" title="Reload">&#x21BB;</button></div>
-  <div><button onclick="go('motion_start')" title="Start">&#9655;</button></div>
+<!--  <div><button class="reload" onclick="vidyaUpdate()" title="Reload">&#x21BB;</button></div> -->
+  <div><button onclick="go('motion_start')" title="Start"><!--&#x23FD;-->&#9655;</button></div>
   <div class="out"><div class="output" id="res_motion_start">&nbsp;</div></div>
-  <div><button onclick="go('motion_stop')" title="Stop">&#9634;</button></div>
+  <div><button onclick="go('motion_stop')" title="Stop"><!--&#x2B58;-->&#9634;</button></div>
   <div class="out"><div class="output" id="res_motion_stop">&nbsp;</div></div>
 </div>
 
