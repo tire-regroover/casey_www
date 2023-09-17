@@ -67,6 +67,7 @@ div.viddiv {
   border-radius: 4px;
 }
 img.vidya {
+  visibility: hidden;
   width: 100%;
   height: 100%;
   position: absolute;
@@ -87,14 +88,15 @@ const handler = "handler.php?action=";
 const vidya_url = "/cam";
 const retry_ms = 30000;
 
-var repeater;
-var v = 0;
+var repeater = setInterval(vidyaUpdate, retry_ms);
 
-repeater = setInterval(vidyaUpdate, retry_ms);
+function token() {
+  return Math.random().toString(36).substr(2).concat(Math.random().toString(36).substr(2));
+}
 
 function vidyaUpdate() {
+  document.getElementById("vidya_image").src = vidya_url.concat("?", token());
   document.getElementById("vidya_image").style.visibility = "visible";
-  document.getElementById("vidya_image").src = vidya_url.concat("?", v++);
 }
 
 function vidyaStopped() {
@@ -133,7 +135,7 @@ function go(thing) {
 </script>
 </head>
 
-<body>
+<body onload="vidyaUpdate()">
 
 <div class="left">
   <div><button onclick="go('motion_start')" title="Start"><!--&#x23FD;-->&#9655;</button></div>
@@ -146,7 +148,7 @@ function go(thing) {
 <div class="right">
   <div class="viddiv">
     <a href="/cam">
-      <img id="vidya_image" class="vidya" onLoad="vidyaUpdate()" onerror="vidyaStopped()" />
+      <img id="vidya_image" class="vidya" onerror="vidyaStopped()" />
     </a>
   </div>
 </div>
