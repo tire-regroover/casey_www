@@ -19,9 +19,6 @@ switch ($_GET["action"]) {
     exec('/var/www/casey_scripts/stop_cam', $output, $retval);
     echo checkret($retval);
     break;
-  case 'phpinfo':
-    phpinfo();
-    break;
 }
 
 ?>
