@@ -22,14 +22,16 @@ body {
   background: linear-gradient(-45deg, #ffffff, #154279);
   background-size: 200% 200%;
 }
-button {
+button, a.files {
+  text-align: center;
+  text-decoration: none;
   margin: 5px 0;
   font-weight: 600;
   font-size: 2.3vw;
   padding: 0.5em 0.3em;
   width: 5em;
   background-color: #154c79;
-  color: #7f97b5;
+  color: #cde;
   outline: 0;
   border: 0;
   border-radius: 1.5em;
@@ -41,7 +43,7 @@ button {
               23px 0 20px -23px rgba(0, 0, 0, .8),
               inset 0 0 40px rgba(0, 0, 0, .1);
 }
-button:hover {
+button:hover, a.files:hover {
   transform: scale(1.05);
 }
 .output {
@@ -60,7 +62,6 @@ div.viddiv {
   padding-top: 56.25%;
   width: 100%;
   position: relative;
-  /*background-color: #282a2d;*/
   background: linear-gradient(45deg, #282a2d, #154279);
   background-size: 300% 300%;
   border-radius: 4px;
@@ -83,7 +84,6 @@ div.right {
 
 <script>
 const handler = "handler.php?action=";
-//const vidya_url = "http://192.168.0.18:8081/";
 const vidya_url = "/cam";
 const retry_ms = 30000;
 
@@ -94,13 +94,11 @@ repeater = setInterval(vidyaUpdate, retry_ms);
 
 function vidyaUpdate() {
   document.getElementById("vidya_image").style.visibility = "visible";
-  document.getElementById("vidya_image").src = vidya_url + "?" + (v++);
-//  clearInterval(repeater);
+  document.getElementById("vidya_image").src = vidya_url.concat("?", v++);
 }
 
 function vidyaStopped() {
   document.getElementById("vidya_image").style.visibility = "hidden";
-//  repeater = setInterval(vidyaUpdate, retry_ms);
 }
 
 function get(url, callback, fail) {
@@ -138,15 +136,19 @@ function go(thing) {
 <body onLoad="vidyaUpdate()">
 
 <div class="left">
-<!--  <div><button class="reload" onclick="vidyaUpdate()" title="Reload">&#x21BB;</button></div> -->
   <div><button onclick="go('motion_start')" title="Start"><!--&#x23FD;-->&#9655;</button></div>
   <div class="out"><div class="output" id="res_motion_start">&nbsp;</div></div>
   <div><button onclick="go('motion_stop')" title="Stop"><!--&#x2B58;-->&#9634;</button></div>
   <div class="out"><div class="output" id="res_motion_stop">&nbsp;</div></div>
+  <div><a href="/files/?C=M&O=A" class="files" title="Files"><!--&#128448;-->&#128053;</a></div>
 </div>
 
 <div class="right">
-  <div class="viddiv"><a href="/cam"><img id="vidya_image" class="vidya" onLoad="vidyaUpdate()" onerror="vidyaStopped()" /></a></div>
+  <div class="viddiv">
+    <a href="/cam">
+      <img id="vidya_image" class="vidya" onLoad="vidyaUpdate()" onerror="vidyaStopped()" />
+    </a>
+  </div>
 </div>
 
 </body>
