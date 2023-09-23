@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+sudo raspivid -n -t 60000 -o "/cam_local/$(date --rfc-3339=seconds).h264"
+

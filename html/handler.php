@@ -19,6 +19,14 @@ switch ($_GET["action"]) {
     exec('/var/www/casey_scripts/stop_cam', $output, $retval);
     echo checkret($retval);
     break;
+  case 'take_pic':
+    exec('/var/www/casey_scripts/take_pic', $output, $retval);
+    echo checkret($retval);
+    break;
+  case 'take_movie':
+    exec('/var/www/casey_scripts/take_movie', $output, $retval);
+    echo checkret($retval);
+    break;
 }
 
 ?>

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+sudo raspistill -n -o "/cam_local/$(date --rfc-3339=seconds).jpg"
+

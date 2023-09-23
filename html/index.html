@@ -125,7 +125,7 @@ function go(thing) {
   var res = document.getElementById("res_".concat(thing));
   get(handler.concat(thing),
     function(xhtml) {
-      res.innerHTML = (new Date).toLocaleString().concat(": <span class='ok'>", xhtml.responseText, "</span>");
+      res.innerHTML = (new Date).toLocaleString().concat(": <span class='", (xhtml.responseText == "ok" ? "ok" : "fail") ,"'>", xhtml.responseText, "</span>");
     },
     function(xhtml) {
       res.innerHTML = ("<span class='fail'>").concat((new Date).toLocaleString(), ": ", xhtml.responseText, "</span>");
@@ -142,6 +142,10 @@ function go(thing) {
   <div class="out"><div class="output" id="res_motion_start">&nbsp;</div></div>
   <div><button onclick="go('motion_stop')" title="Stop"><!--&#x2B58;-->&#9634;</button></div>
   <div class="out"><div class="output" id="res_motion_stop">&nbsp;</div></div>
+  <div><button onclick="go('take_pic')" title="Pic">Snap</button></div>
+  <div class="out"><div class="output" id="res_take_pic">&nbsp;</div></div>
+  <div><button onclick="go('take_movie')" title="Movie">Record</button></div>
+  <div class="out"><div class="output" id="res_take_movie">&nbsp;</div></div>
   <div><a href="/files/?C=M&O=A" class="files" title="Files"><!--&#128448;-->&#128053;</a></div>
 </div>
 
