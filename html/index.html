@@ -46,6 +46,10 @@ button, a.files {
 button:hover, a.files:hover {
   transform: scale(1.05);
 }
+button:disabled {
+  background-color: #627b84;
+  color: #98acb3;
+}
 .output {
   margin: 0 2px 12px 4px;
   font-size: 1.5vw;
@@ -123,8 +127,13 @@ function get(url, callback, fail) {
 
 function go(thing) {
   var res = document.getElementById("res_".concat(thing));
+  var caller = event.srcElement;
+
+  caller.disabled = true;
+
   get(handler.concat(thing),
     function(xhtml) {
+      caller.disabled = false;
       res.innerHTML = (new Date).toLocaleString().concat(": <span class='", (xhtml.responseText == "ok" ? "ok" : "fail") ,"'>", xhtml.responseText, "</span>");
     },
     function(xhtml) {
