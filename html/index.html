@@ -43,7 +43,7 @@ button, a.files {
               23px 0 20px -23px rgba(0, 0, 0, .8),
               inset 0 0 40px rgba(0, 0, 0, .1);
 }
-button:hover, a.files:hover {
+button:hover:enabled, a.files:hover {
   transform: scale(1.05);
 }
 button:disabled {
@@ -132,13 +132,13 @@ function go(thing) {
   caller.disabled = true;
 
   get(handler.concat(thing),
-    function(xhtml) {
+    function(xhttp) {
       caller.disabled = false;
-      res.innerHTML = (new Date).toLocaleString().concat(": <span class='", (xhtml.responseText == "ok" ? "ok" : "fail") ,"'>", xhtml.responseText, "</span>");
+      res.innerHTML = (new Date).toLocaleString().concat(": <span class='", (xhttp.responseText == "ok" ? "ok" : "fail") ,"'>", xhttp.responseText, "</span>");
     },
-    function(xhtml) {
+    function(xhttp) {
       caller.disabled = false;
-      res.innerHTML = ("<span class='fail'>").concat((new Date).toLocaleString(), ": ", xhtml.responseText, "</span>");
+      res.innerHTML = ("<span class='fail'>").concat((new Date).toLocaleString(), ": ", xhttp.responseText, "</span>");
     }
   );
 }
