@@ -137,6 +137,7 @@ function go(thing) {
       res.innerHTML = (new Date).toLocaleString().concat(": <span class='", (xhtml.responseText == "ok" ? "ok" : "fail") ,"'>", xhtml.responseText, "</span>");
     },
     function(xhtml) {
+      caller.disabled = false;
       res.innerHTML = ("<span class='fail'>").concat((new Date).toLocaleString(), ": ", xhtml.responseText, "</span>");
     }
   );
